@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>同じなんだ 〜Someday These Tears Will Dry〜 — 大森カエ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+  :root{
+    --ink: #ecebe6;
+    --ink-soft: #c4c2ba;
+    --ink-faint: #7d7c76;
+    --dawn: #d6b89a;        /* 夜明けの暖色 */
+    --dawn-soft: #b89274;
+    --bg-top: #0c0e16;      /* まだ夜 */
+    --bg-mid: #1a1722;
+    --bg-low: #2a2230;      /* 地平に滲む暖色 */
+    --bg-glow: #3d2f33;
+    --line: rgba(214,184,154,0.20);
+    --en: #9a96a0;
+    --we: #d6b89a;          /* "we" の連帯の色 */
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    background: linear-gradient(180deg,
+      var(--bg-top) 0%, var(--bg-mid) 50%, var(--bg-low) 82%, var(--bg-glow) 100%);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', serif;
+    line-height: 2.1; letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+
+  /* 地平線の光 */
+  .horizon{
+    position: fixed; left:0; right:0; bottom:0; height: 42vh; z-index:0;
+    background: radial-gradient(ellipse 120% 100% at 50% 130%,
+      rgba(214,184,154,0.22) 0%, rgba(184,146,116,0.08) 40%, transparent 70%);
+    pointer-events:none;
+  }
+  .sky{ position: fixed; inset:0; z-index:0; pointer-events:none; }
+  .star{
+    position:absolute; width:2px; height:2px; border-radius:50%;
+    background:#d6d2c4; opacity:0.5; animation: tw 5s infinite ease-in-out;
+  }
+  @keyframes tw{ 0%,100%{opacity:0.12;} 50%{opacity:0.6;} }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 660px; margin: 0 auto; padding: 14vh 26px 16vh;
+  }
+
+  .title{ text-align:center; margin-bottom: 9vh; }
+  .title .en{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size: 1.05rem; letter-spacing:0.18em; color: var(--dawn-soft);
+    display:block; margin-bottom: 1.3em;
+  }
+  .title h1{
+    font-weight:500; font-size: clamp(1.8rem, 5.5vw, 2.6rem);
+    letter-spacing: 0.1em; color: var(--dawn);
+    text-shadow: 0 0 26px rgba(214,184,154,0.18); line-height:1.5;
+  }
+  .title .by{
+    margin-top:1.6em; font-size:0.85rem; letter-spacing:0.3em; color: var(--ink-faint);
+  }
+
+  /* 献辞 — 手紙の宛名と約束 */
+  .dedication{
+    text-align:center; margin: 0 auto 8vh; max-width: 33em;
+  }
+  .ded-ja{
+    color: var(--ink-soft); font-size: 1.0rem; line-height: 2.1;
+    letter-spacing: 0.06em; margin-bottom: 2.4em;
+  }
+  .ded-treasure{
+    color: var(--dawn); font-size: 1.18rem; line-height: 2.0;
+    letter-spacing: 0.07em; font-weight: 500;
+    text-shadow: 0 0 24px rgba(214,184,154,0.20);
+  }
+  .ded-en{
+    display:block; margin-top: 2.8em;
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    color: var(--en); font-size: 0.92rem; line-height: 1.9; letter-spacing:0.02em;
+  }
+  .ded-en em{ color: var(--dawn-soft); font-style:italic; }
+
+  .intro{
+    border-left: 1px solid var(--line);
+    padding: 0.3em 0 0.3em 1.7em; margin: 0 auto 11vh;
+    color: var(--ink-soft); font-size: 1.0rem; line-height:2.25;
+  }
+  .intro p{ margin-bottom:1.2em; }
+  .intro p:last-child{ margin-bottom:0; }
+  .intro .em{ color: var(--dawn); }
+  .intro .en{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    color: var(--en); font-size:0.9rem; line-height:1.95;
+    display:block; margin-top:2em;
+  }
+
+  /* 歌詞本文 */
+  .lyric{ font-size: 1.06rem; line-height: 2.4; color: var(--ink); }
+  .lyric p{ margin:0 0 2.1em; white-space:pre-line; }
+  .lyric p:last-child{ margin-bottom:0; }
+
+  /* 英語の問い・決め台詞 */
+  .lyric .en{
+    color: var(--en); font-style:italic;
+    font-family:'Cormorant Garamond','Shippori Mincho',serif; font-size:0.99rem;
+  }
+  /* "we / 同じ" の連帯部分 — 夜明け色で灯す */
+  .lyric .we{ color: var(--we); }
+  .lyric .we .en{ color: var(--we); }
+
+  /* サビの区切り装飾 */
+  .chorus{
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 2.1em 0; margin: 2.1em 0;
+  }
+  .chorus p{ margin-bottom:0; }
+
+  .final{
+    text-align:center; margin-top: 3vh; padding-top: 2.5em;
+  }
+  .final .en{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:1.3rem; color: var(--dawn);
+    text-shadow: 0 0 24px rgba(214,184,154,0.25);
+    display:block; letter-spacing:0.06em;
+  }
+  .final .ja{
+    margin-top:0.9em; color: var(--dawn-soft); font-size:1.0rem; letter-spacing:0.1em;
+  }
+
+  footer{
+    text-align:center; margin-top: 9vh; padding-top: 6vh;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint); font-size:0.85rem; letter-spacing:0.08em; line-height:2.2;
+  }
+  footer .en{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    display:block; margin-top:0.8em; color:var(--en);
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding: 10vh 20px 13vh; }
+    .intro{ padding-left:1.3em; }
+    .lyric{ font-size:1.0rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky"></div>
+<div class="horizon"></div>
+
+<div class="wrap">
+
+  <div class="title">
+    <span class="en">Someday These Tears Will Dry</span>
+    <h1>同じなんだ</h1>
+    <div class="by">大森 カエ</div>
+  </div>
+
+  <div class="dedication">
+    <p class="ded-ja">今、生きている私から。<br>
+    過去の、死をいつも考えていた私へ。</p>
+    <p class="ded-treasure">今の苦しみは、<br>
+    生きてさえいれば、いつか宝物に変わる。</p>
+    <span class="ded-en"><em>From me, who is living now —<br>
+    to the me who always thought of dying.</em><br><br>
+    The pain you carry now will, if only you keep living, someday become a treasure.</span>
+  </div>
+
+  <div class="intro">
+    <p>真夜中に、ひとりで目が覚めてしまう夜があります。</p>
+    <p>何のために生きているんだろう、と思う夜。<br>
+    そんな夜は、たぶん、あなただけのものじゃありません。<span class="em">みんな、同じです。</span></p>
+    <span class="en">There are nights when you wake alone in the dark, wondering why you are even alive. Those nights, I think, do not belong to you alone. We are all the same.</span>
+  </div>
+
+  <div class="lyric">
+
+<p>真夜中、目が覚めて
+止めどなく涙が溢れた
+僕はどこに向かうのだろう？
+このまま夢も分からずに生きるのか？
+嫌なことばかり　嫌なことしかない
+楽しい時間は一瞬で泡になって
+跡形もなく消えていく
+毎日は苦痛なのに
+大人は「それが普通」と言う
+僕が望んだのはこんな日々じゃなかった
+「何で産んだの？」胸の奥で叫ぶ</p>
+
+<div class="chorus"><p><span class="en">Why am I living?</span>
+何のために　僕は生きている？
+<span class="en">Does this pain have meaning?</span>
+この苦しさに　意味はあると言うの？
+<span class="en">I ask my parents, I ask adults</span>
+親や大人に聞いても
+<span class="en">No one answers</span>
+誰も答えない
+<span class="en">Why?</span>
+何故？</p></div>
+
+<p>「生きていれば良い事がある」
+「良い学校、良い会社に行けば何とかなる」
+だけどニュースでは
+失意に立つ大人の姿が流れている
+生きる意味を聞いても
+答えない大人達
+僕は知ってしまった
+親が真夜中　将来の不安を語っていた
+大人もまた生きる意味を知らないのかも
+いつも笑っているあの先生も
+悩んでいるのだろうか
+誰もが悩みながら
+生きていることを僕は知った</p>
+
+<div class="chorus"><p><span class="en">Why am I living?</span>
+何のために　僕は生きている？
+<span class="en">Does this pain have meaning?</span>
+この苦しさに　意味はあると言うの？
+<span class="en">I ask my parents, I ask adults</span>
+親や大人に聞いても
+<span class="en">No one answers</span>
+誰も答えない
+<span class="we"><span class="en">But we're all the same</span>
+でも　誰もが同じなんだ</span></p></div>
+
+<p>くだらないテレビ番組に
+真剣に聞き耳を立てる大人
+僕は　そんな未来はいらない
+もっと違うものであって欲しい
+楽しい事だけ出来たら、いいのに
+でも　きっと　それも誰もが思ってる</p>
+
+<div class="chorus"><p class="we"><span class="en">Why are we living?</span>
+何のために　僕らは生きている？
+<span class="en">Searching for meaning in this pain</span>
+この苦しさに　意味を探し続ける
+<span class="en">No one has the answer</span>
+答えなんて　誰も持っていない
+<span class="en">Adults and children</span>
+大人も子供も
+<span class="en">We're all the same</span>
+同じなんだ</p></div>
+
+<p>涙に濡れた枕は　月灯で乾かし
+僕は深い眠りにつきたい
+何も考えず　明日を迎えるために
+また明日を　迎えるために</p>
+
+  </div>
+
+  <div class="final">
+    <span class="en">Someday these tears will dry</span>
+    <span class="ja">涙はいつか消える</span>
+  </div>
+
+  <footer>
+    あなたが今夜、ひとりだと感じているなら。<br>
+    どうか、また明日を迎えてください。
+    <span class="en">If you feel alone tonight — please, live to see tomorrow.</span>
+  </footer>
+
+</div>
+
+<script>
+  const sky = document.getElementById('sky');
+  for(let i=0;i<55;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    s.style.left = Math.random()*100 + '%';
+    // 上の方ほど星を濃く（地平線付近は夜明けで薄く）
+    s.style.top = (Math.random()*65) + '%';
+    s.style.animationDelay = (Math.random()*5) + 's';
+    const sz = Math.random()*1.4 + 1;
+    s.style.width = sz+'px'; s.style.height = sz+'px';
+    sky.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
