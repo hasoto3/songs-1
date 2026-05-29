@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黒翼と砂利の城  — 大森カエ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root{
+    --ink: #e8e6df;
+    --ink-soft: #b9b6ad;
+    --ink-faint: #6f6e69;
+    --moon: #d9cfa8;
+    --moon-soft: #b7a978;
+    --bg-top: #0a0c12;
+    --bg-mid: #12131b;
+    --bg-low: #161520;
+    --line: rgba(217,207,168,0.18);
+    --en: #8d8a93;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  body{
+    background: linear-gradient(180deg,var(--bg-top) 0%,var(--bg-mid) 45%,var(--bg-low) 100%);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', serif;
+    line-height: 2.1;
+    letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 月と星の背景 */
+  .sky{
+    position: fixed; inset:0; z-index:0; pointer-events:none;
+  }
+  .moon{
+    position: absolute; top: 7%; right: 12%;
+    width: 130px; height:130px; border-radius:50%;
+    background: radial-gradient(circle at 38% 38%, #f3ebcf 0%, #d9cfa8 45%, #9c9068 100%);
+    box-shadow: 0 0 70px 20px rgba(217,207,168,0.16);
+    opacity:0.85;
+  }
+  .star{
+    position:absolute; width:2px; height:2px; border-radius:50%;
+    background:#d9cfa8; opacity:0.5;
+    animation: twinkle 4s infinite ease-in-out;
+  }
+  @keyframes twinkle{ 0%,100%{opacity:0.15;} 50%{opacity:0.7;} }
+
+  .wrap{
+    position: relative; z-index:1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 14vh 26px 18vh;
+  }
+
+  /* タイトル */
+  .series-title{
+    text-align:center; margin-bottom: 10vh;
+  }
+  .series-title .en{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic; font-size: 1rem; letter-spacing:0.22em;
+    color: var(--moon-soft); display:block; margin-bottom: 1.4em;
+  }
+  .series-title h1{
+    font-weight:500; font-size: clamp(1.9rem, 6vw, 2.9rem);
+    letter-spacing: 0.14em; color: var(--moon);
+    text-shadow: 0 0 24px rgba(217,207,168,0.18);
+    line-height:1.5;
+  }
+  .series-title .by{
+    margin-top:1.8em; font-size:0.85rem; letter-spacing:0.3em;
+    color: var(--ink-faint);
+  }
+
+  /* あんパンの導入 */
+  .prologue{
+    border-left: 1px solid var(--line);
+    padding: 0.4em 0 0.4em 1.8em;
+    margin: 0 auto 14vh;
+    color: var(--ink-soft);
+    font-size: 1.02rem; line-height:2.3;
+  }
+  .prologue p{ margin-bottom: 1.4em; }
+  .prologue .em{ color: var(--ink); }
+  .prologue .en{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    color: var(--en); font-size:0.92rem; letter-spacing:0.04em;
+    line-height:2; display:block; margin-top:2.4em;
+  }
+  .prologue .lead{ margin-top:2.4em; color:var(--moon-soft); }
+
+  /* 章 */
+  .song{ margin-bottom: 13vh; }
+  .song-head{
+    text-align:center; margin-bottom: 6vh;
+  }
+  .song-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-style:italic; color: var(--moon-soft);
+    display:block; line-height:1; margin-bottom:0.5em;
+    opacity:0.8;
+  }
+  .song-title-ja{
+    font-size: 1.15rem; letter-spacing:0.12em; color:var(--moon);
+    font-weight:500;
+  }
+  .song-title-en{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:0.95rem; letter-spacing:0.08em; color: var(--en);
+    display:block; margin-top:0.6em;
+  }
+  .ornament{
+    text-align:center; color:var(--moon-soft); opacity:0.5;
+    font-size:0.9rem; letter-spacing:0.5em; margin: 5vh 0;
+  }
+
+  /* 歌詞本文 */
+  .lyric{
+    font-size: 1.04rem; line-height: 2.35; color: var(--ink);
+    text-align: left;
+  }
+  .lyric .sec{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:0.78rem; letter-spacing:0.18em; color: var(--ink-faint);
+    display:block; margin: 2.6em 0 0.9em; text-transform:lowercase;
+  }
+  .lyric .sec:first-child{ margin-top:0; }
+  .lyric .en{
+    color: var(--en); font-style:italic;
+    font-family:'Cormorant Garamond','Shippori Mincho',serif;
+    font-size:0.96rem;
+  }
+  .lyric p{ margin:0; white-space:pre-line; }
+
+  footer{
+    text-align:center; margin-top: 8vh; padding-top: 6vh;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint); font-size:0.85rem; letter-spacing:0.1em;
+    line-height:2.2;
+  }
+  footer .en{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    display:block; margin-top:0.8em; color:var(--en);
+  }
+
+  @media (max-width:520px){
+    .wrap{ padding: 10vh 20px 14vh; }
+    .moon{ width:90px; height:90px; top:5%; right:8%; }
+    .prologue{ padding-left:1.3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky">
+  <div class="moon"></div>
+</div>
+
+<div class="wrap">
+
+  <div class="series-title">
+    <span class="en">Ep. I can't touch you</span>
+    <h1>黒翼と砂利の城</h1>
+    <div class="by">大森 カエ</div>
+  </div>
+
+  <div class="prologue">
+    <p>この曲は、看護学校の頃の話から始まりました。</p>
+    <p>実習で夕飯を食べそびれて、次の日の電車賃を引いたら、手元に110円。<br>
+    あんパンを買って食べたら、すごく美味しかった。<span class="em">今でも好きです。</span></p>
+    <p class="lead">——書き始めたら、二時間で、こんな物語になっていました。<br>
+    私にもよく分かりません。</p>
+    <p class="lead">順番に、読んでみてください。</p>
+    <span class="en">This song started with a memory from my nursing school days.
+I missed dinner after a long practical, and after setting aside my train fare for the next day, I had 110 yen left. I bought a sweet bean bun, and it tasted so good. I still love them.
+
+— But once I started writing, in about two hours, it had become this story. I don't really understand it myself.
+
+Please read them in order.</span>
+  </div>
+
+  <div class="ornament">❋</div>
+
+  <!-- 1曲目 -->
+  <div class="song">
+    <div class="song-head">
+      <span class="song-num">I</span>
+      <span class="song-title-ja">明日を生きるため</span>
+    </div>
+    <div class="lyric">
+<span class="sec">Verse 1</span><p>明日を　生きるため
+コインは　ポケットに隠し
+残ったコインで　パン1つ
+胃に　流し込んだ
+あの頃
+満たされない
+空虚感が
+胸の奥に　満ちていた
+生きる事で　精一杯な日々
+君だけが　味方だった
+<span class="en">kind person</span></p>
+<span class="sec">Verse 2</span><p><span class="en">Bank account balance</span>
+明日の
+宿なしを　示唆する
+未来を告げる
+時代が　僕を試し
+足掻き　続ける
+姿を　嘲笑っていた
+君は　救いの手を
+いつも　差しのべてくれた
+<span class="en">You didn't ask for anything in return</span></p>
+<span class="sec">Pre-chorus</span><p>救いの手
+恵みの心
+癒やしの笑み
+全てが
+映像の残像に　同化し
+深緑の瞳に
+オレンジ色の　ランタンが灯す光
+淡い想いを　呑み込んだ</p>
+<span class="sec">Chorus 1</span><p>朝焼けに　映る
+後ろ姿の君
+かけた声は
+朝を告げる鳥に
+かき消され
+霧の中
+君は　遠のいた
+息詰まる　水の中
+溺れる僕を
+見下す　大人達
+君の後ろ姿を
+気が遠くなる　時空の中
+探し求めていた
+<span class="en">I kept searching for you.</span></p>
+<span class="sec">Verse 3</span><p>砂利を　かき集め
+完成した城に　宝物を詰め込み
+不自由ない
+世界の夢を　抱きしめる
+満月の光に　包まれ
+温かな視線を　浴び
+目を閉じ
+君の気配を　探した</p>
+<span class="sec">Bridge 1</span><p>君が　呼ぶ声
+僕は　駆け寄ろうと
+必死に　足を出すけど
+君は　遠のく
+手の届かない　そんな幻想
+<span class="en">You're the only one I can't touch.</span></p>
+<span class="sec">Chorus 2</span><p>天空に　君が滲む
+目が覚めて　見た
+朝焼けに
+君がいない世界
+果てなき　闇の世界
+僕は　藻掻き苦しむ
+唇　なぞり
+冷たい肌を　温める
+そんな　幻想に
+心ごと　攫われる
+鳥の声が　時を知らせる</p>
+<span class="sec">Bridge 2</span><p>コイン一つ
+ポケットに　忍ばせ
+明日を生きる夢　を見る
+幻想に　歪んで見える
+謎めいた　人影
+君がいない　世界の果て
+僕は　天を仰ぐ
+<span class="en">I only want you</span></p>
+<span class="sec">Outro</span><p>砂利の城に　隠した
+秘密の箱
+Keyは　君が持ち帰った
+君がいない　世界
+秒針は　刻み続ける
+いつか会う　その時まで
+<span class="en">I will live in agony in a world without you.</span>
+大人になった　僕を
+その瞳で
+つかまえて　離さないで
+君を　守るため
+リアルな君を　知るため
+僕は強くなる</p>
+    </div>
+  </div>
+
+  <div class="ornament">❋</div>
+
+  <!-- 2曲目 -->
+  <div class="song">
+    <div class="song-head">
+      <span class="song-num">II</span>
+      <span class="song-title-ja">Actions for survival</span>
+      <span class="song-title-en">A dream leading to death</span>
+    </div>
+    <div class="lyric">
+<span class="sec">Verse 1</span><p>鳥が　餌を啄む
+その姿に
+僕は吐き気を覚えた
+君は　僕の隣で
+生きるために
+必要な事だと　囁いた
+鳥は　僕らに気付かず
+生きるために
+餌を啄み
+血と肉を満たした
+<span class="en">Actions for survival</span></p>
+<span class="sec">Verse 2</span><p>明日のパンを買うため
+朝から晩まで　働く日々
+大人達の汚さを　横目に
+ただ働いた日々
+鳥は　朝の訪れと
+ともに旅立つ
+朝露　羽根に
+滴らせて
+<span class="en">I want to be free from this place too.</span></p>
+<span class="sec">Pre-chorus</span><p>泣いた夜は
+君が　いつも
+心を撫でてくれた
+寂しいのか
+悲しいのか
+なぜ　苦しいのか
+理由も見つからない
+極限の世界
+<span class="en">Do I still have to live?</span></p>
+<span class="sec">Chorus 1</span><p>僕が差し伸べる手を
+君だけが握りしめてくれた
+眠れない夜は
+月と星が
+君と寄り添い
+僕を見守ってくれた
+月の淡い光が
+僕を包みこみ
+心安らぐ
+波音を聴きながら
+僕は　長い夜の夢を見ていた
+覚めない眠りを　知りたかった</p>
+<span class="sec">Verse 3</span><p>大人になる夢を見た
+瓦礫の上に立ち
+足元が崩れる
+恐怖に怯える　僕
+背に生えた
+黒翼が告げる　未来の姿
+黒魔術に魅了され
+十字架背負い
+足の裏　血で染まる夢
+<span class="en">A dream leading to death</span></p>
+<span class="sec">Bridge 1</span><p>朝陽を浴び
+目が覚めて知る
+現実の世界
+まだ生きている事を
+知らせる　鳥たち
+鼓動が静かに
+鳴り響く　朝
+<span class="en">Still alive</span></p>
+<span class="sec">Chorus 2</span><p>かき消される　鼓動
+確かに存在する人々
+どこまでが
+現実で
+君と過ごした
+時間の真意を
+知る術を探す
+月に願いを
+星に祈りを
+君の行方を案じながら
+僕は　幾夜も過ごした</p>
+<span class="sec">Bridge 2</span><p>眠れない夜は
+月の光に
+包まれる夢を見る
+君が　そっと
+撫でてくれる頬
+温かな熱が　心地よくて
+覚めない夢を見たいと
+星に願った
+<span class="en">I was reaching for your hand.</span></p>
+<span class="sec">Outro</span><p>季節を何度も迎え
+君を探し続けた
+見つからない　痕跡
+だけど　確かな温もり
+どこまでが夢で
+現実だったかも
+分からない　夢
+<span class="en">I kept searching for only you.</span>
+覚めない眠りを
+赤いバラで　埋め尽くしたかった</p>
+    </div>
+  </div>
+
+  <div class="ornament">❋</div>
+
+  <!-- 3曲目 -->
+  <div class="song">
+    <div class="song-head">
+      <span class="song-num">III</span>
+      <span class="song-title-ja">喉の奥、焼けつく痛み</span>
+      <span class="song-title-en">It all depends on God</span>
+    </div>
+    <div class="lyric">
+<span class="sec">Verse 1</span><p>喉の奥　焼けつく痛み
+感じる　背筋　凍る視線
+僕は　君に抱きしめられ
+安堵の中で　時を数えた
+息苦しい世界に
+見える光は　蜘蛛の糸だった
+朝露に光放つ
+細くしなやかな　毒の結晶</p>
+<span class="sec">Verse 2</span><p>死と隣り合わせの日々
+コインを　片手に生き
+僕は　雨の恵みで
+心を洗い　今日を生きた
+見下す大人に
+何も感じない　麻痺した心
+君だけが　手を差し伸べ
+優しく抱きしめ　守ってくれた
+<span class="en">The rain cleansed my heart.</span>
+僕も　守ると誓う</p>
+<span class="sec">Pre-chorus</span><p>大人になり
+誰かを守る術を身につけた
+なのに
+君だけがいない
+守りたいのに
+側にいてほしいのに
+<span class="en">Why aren't you here?</span></p>
+<span class="sec">Chorus 1</span><p>喉に残る　焼けつく痛み
+今も　赤いバラの匂いで充満する
+向けられる　視線
+その先にある
+黒翼が
+心操る　マーメイドの声を奏でる
+誰もが　差しのべなかった
+その手を　僕に向け
+吐き気を覚えた
+<span class="en">The greed of adults</span></p>
+<span class="sec">Verse 3</span><p>君の温もりを求め
+世界中を歩いた
+恥も　プライドも
+全てを捨てて　君を探した
+君だけがいない
+夢を現実が　交差した過去
+君だけが　僕に
+愛おしさ　希望を教えてくれた</p>
+<span class="sec">Bridge 1</span><p>君の視線
+君の声
+君の仕草
+全てが愛おしくて
+抱きしめ　守りたくなる
+虚像なのか
+現実なのか
+<span class="en">I don't know.</span>
+だけど　心は求め続けている</p>
+<span class="sec">Chorus 2</span><p>コイン一つで　パンを買い
+貪るように　胃に流し込んだ
+冷たい　人の視線
+気にする暇もなく
+生きる事に　必死だった
+僕は　君を支えに
+今日を　繋ぎ生きた
+<span class="en">You were my only ally.</span></p>
+<span class="sec">Bridge 2</span><p>君を探し
+君を求め
+だけど　君の存在は
+不確かな　記憶に埋もれ
+月に　君に会いたいと
+願い続けた
+<span class="en">You are the only one I cherish</span></p>
+<span class="sec">Outro</span><p>君に　会いたい
+叶う術は　見つからない
+月夜に誓う
+君への　不変の愛を
+時の神だけが
+未来を知る
+唯一の　砦
+<span class="en">It all depends on God.</span></p>
+    </div>
+  </div>
+
+  <div class="ornament">❋</div>
+
+  <!-- 4曲目 -->
+  <div class="song">
+    <div class="song-head">
+      <span class="song-num">IV</span>
+      <span class="song-title-ja">手に入れた鞄</span>
+      <span class="song-title-en">I won't look back on the past anymore</span>
+    </div>
+    <div class="lyric">
+<span class="sec">Verse 1</span><p>手に入れた　鞄
+君に見せたくて
+街の中　君を探す
+幾夜も
+月下の光浴び
+押し潰される痛み
+とめどなく流れる涙
+君との再会を　待ち続けた
+僕は　大人の道を辿った
+君を求め
+君に捧げたかった
+愛の告白
+叶わない夢は
+砂利の城に　隠した
+<span class="en">In the coarse gravel</span></p>
+<span class="sec">Verse 2</span><p>コインを稼げる
+大人になり
+いつでも　君のために
+コインを　持ち歩いたけど
+姿も声も　僕の視界から
+君は　消え去り
+君の匂い　笑顔　気配
+記憶は砂に風化し
+鳥が　海に捨てた
+<span class="en">Never to be found again</span></p>
+<span class="sec">Pre-chorus</span><p>なくしたはずの
+君の温もりが
+不意に思い起こされ
+懐かしい思い出に
+涙が　溺れ出た
+淡い　おぼろ月の夜
+雨に流れ　消えた記憶
+<span class="en">Unreachable memories</span></p>
+<span class="sec">Chorus 1</span><p>優しい笑顔
+頬撫でる　温かな手
+全ては　心が覚えている
+記憶は曖昧に
+だけど　覚えている
+パン1つで　生きた
+あの頃
+君だけが　僕を抱きしめてくれた
+君だけが　僕を見つめてくれた
+心が　泣き叫ぶ
+君が欲しいと
+君に会いたいと</p>
+<span class="sec">Verse 3</span><p>現実と幻想が
+入り交じる記憶
+曖昧だけど
+確かな　優しさが
+そこにあった
+心の奥に　浮かぶ
+かすかな
+君の笑顔　深緑の瞳
+砂利の城に隠した
+君が　脳裏に浮かぶ
+<span class="en">I want to see you once more</span></p>
+<span class="sec">Bridge 1</span><p>君の手を　求める僕は
+もういない
+泣いていた僕を
+抱きしめてくれた
+君がいない現実に
+胸が痛む</p>
+<span class="sec">Chorus 2</span><p>守ってくれる
+優しさに　恋をしたと
+今なら　言える
+触れることも
+心　通わせる事も
+叶わない　恋心
+愛なのか　同情なのか
+幻想が　君を作り出したのか
+現実で　君と過ごしたのか
+全てが　曖昧の
+だけど
+君に恋していたことは
+確かな　事実
+<span class="en">I wanted it so badly</span></p>
+<span class="sec">Bridge 2</span><p>大切な人が現れ
+君を裏切る
+罪悪感にうなだれた
+月夜　君の夢を見た
+会いたかった　人
+だけど　熱い想いは
+桜吹雪に舞い
+優しいビロードに化した</p>
+<span class="sec">Outro</span><p>ふとした瞬間
+気づけば
+君の視線を感じていた
+見守ってくれていた事実
+温かい涙が　溢れ出た
+黒翼も砂利の城も
+灰になる夢を見た
+<span class="en">I won't look back on the past anymore</span>
+僕は　君に恋をしていた
+ポケットのコインに　想いを託し
+今日を生きる</p>
+    </div>
+  </div>
+
+  <div class="ornament">❋</div>
+
+  <!-- 5曲目 -->
+  <div class="song">
+    <div class="song-head">
+      <span class="song-num">V</span>
+      <span class="song-title-ja">目が覚めて、涙に気づいた朝</span>
+      <span class="song-title-en">You are a special person</span>
+    </div>
+    <div class="lyric">
+<span class="sec">Verse 1</span><p>目が覚めて
+涙に気づいた　朝
+理由は
+夢の中に　置いてきた
+微かな残り香に
+君の　後ろ姿が
+残像となり
+頭に焼きつく
+<span class="en">I couldn't see your face</span></p>
+<span class="sec">Verse 2</span><p>桜の花弁が舞う
+虚無の世界
+見えない
+明日の僕の姿
+朝日が眩しいと　知ったのは
+大人になり
+初めてのコインを
+手にした日
+<span class="en">The world is bright</span></p>
+<span class="sec">Pre-chorus</span><p>あの日から
+君の声を
+君の姿を
+探す事を
+忘れた
+<span class="en">I was busy every day.</span></p>
+<span class="sec">Chorus 1</span><p>君と共に
+天から見下ろし
+大人になる夢をみた
+あの夜
+空には　星が輝き
+月は　優しく微笑んでいた
+黒翼も砂利の城もなく
+穏やかな　優しさを
+全身で　受け止めた
+君に　もたれかかり
+生暖かい　夜風を浴び
+愛しい人と僕が　笑う姿を
+君は　微笑み
+<span class="en">An unending, long night's dream</span></p>
+<span class="sec">Verse 3</span><p>初めて手にしたコイン
+君が見せた
+最初で最後の　笑顔
+僕の
+頭を撫で　抱き寄せた
+不意に　流れた涙
+触れたか　触れなかったか
+分からない
+初めての　口づけ
+<span class="en">Sweet taste</span></p>
+<span class="sec">Bridge 1</span><p>縋ることも
+泣くことも
+怒る事も
+許されず
+ただ　生きるだけの日々
+ただ　必死に息をした</p>
+<span class="sec">Chorus 2</span><p>与えられるコインは
+パン一つで　消えた
+空腹を埋めるために
+味がなくても
+胃は求めていた
+喉元　突き刺す
+硬いパンを
+<span class="en">I had to eat to survive.</span>
+黒翼が消えた日
+砂利の城の扉は
+閉まったまま
+跡形もなく　灰になり
+君の記憶も匂いも
+<span class="en">I thought it might disappear.</span></p>
+<span class="sec">Chorus 3</span><p>君が
+桜の花弁に　舞い
+空に　溶けていく
+そんな　長い夢を見た
+目が覚めて　思い知る
+温かい　笑顔
+愛しい人　子供達
+守る術を持つ　理由は
+君が　教えてくれた
+<span class="en">Important things nobody tells you</span></p>
+<span class="sec">Outro</span><p>君だけが　手に届かない
+それが　一番だと
+忘れた　はずの
+君の声が　聞こえた
+あの日から　僕は君を
+探すことを　やめた
+永遠に　君に恋したまま
+僕は
+今を
+未来を　生きる
+君との約束は
+また会う日まで
+砂利の城に隠す
+Keyは　君が持っている
+<span class="en">You are a special person</span></p>
+    </div>
+  </div>
+
+  <footer>
+    この詩が、何の歌なのか、私にも分かりません。<br>
+    あなたが感じたものが、この詩の意味です。
+    <span class="en">I don't know what these songs are about. Whatever you felt — that is what they mean.</span>
+  </footer>
+
+</div>
+
+<script>
+  // 星をランダムに散らす
+  const sky = document.getElementById('sky');
+  const n = 60;
+  for(let i=0;i<n;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    s.style.left = Math.random()*100 + '%';
+    s.style.top = Math.random()*100 + '%';
+    s.style.animationDelay = (Math.random()*4) + 's';
+    const sz = Math.random()*1.5 + 1;
+    s.style.width = sz+'px'; s.style.height = sz+'px';
+    sky.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
